@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cuenta regresiva 31 de mayo 2025 - 12:00 PM</title>
+    <style>
+        #cuenta-regresiva {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 15px;
+            background: linear-gradient(to right, #0d0ada, #3b38d3);
+            color: white;
+            max-width: 700px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .unidad-tiempo {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 15px 20px;
+            border-radius: 12px;
+            min-width: 100px;
+        }
+
+        .numero {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .texto {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+
+        @media (max-width: 600px) {
+            #cuenta-regresiva {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="cuenta-regresiva">
+        <div class="unidad-tiempo">
+            <span id="dias" class="numero">00</span>
+            <span class="texto">Días</span>
+        </div>
+        <div class="unidad-tiempo">
+            <span id="horas" class="numero">00</span>
+            <span class="texto">Horas</span>
+        </div>
+        <div class="unidad-tiempo">
+            <span id="minutos" class="numero">00</span>
+            <span class="texto">Minutos</span>
+        </div>
+        <div class="unidad-tiempo">
+            <span id="segundos" class="numero">00</span>
+            <span class="texto">Segundos</span>
+        </div>
+    </div>
+
+    <script>
+        var fechaObjetivo = new Date("May 31, 2025 12:00:00").getTime();
+
+        var intervalo = setInterval(function () {
+            var ahora = new Date().getTime();
+            var diferencia = fechaObjetivo - ahora;
+
+            if (diferencia <= 0) {
+                clearInterval(intervalo);
+                document.getElementById("cuenta-regresiva").innerHTML = "<h2>¡Ha llegado el gran día!</h2>";
+            } else {
+                var dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                var horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+                var segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+                document.getElementById("dias").innerHTML = dias;
+                document.getElementById("horas").innerHTML = horas;
+                document.getElementById("minutos").innerHTML = minutos;
+                document.getElementById("segundos").innerHTML = segundos;
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
